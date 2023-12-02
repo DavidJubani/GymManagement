@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image with Cover</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevent default body margin/padding */
+        }
+
+        img {
+            width: 100vw; /* Full width of the viewport */
+            height: 100vh; /* Full height of the viewport */
+            object-fit: cover; /* Cover the entire container while preserving aspect ratio */
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Move the image to the background */
+        }
+
+        #login-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7); /* Add a semi-transparent black background */
+            padding: 20px; /* Add padding for better visibility */
+            border-radius: 10px; /* Add border-radius for a rounded appearance */
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        #login-form {
+            margin-top: 20px;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 250px;
+            box-sizing: border-box;
+        }
+
+        #login-button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            #login-button:hover {
+                background-color: #555;
+            }
+    </style>
+</head>
+<body>
+
+    <img src="images/slider-bg.jpg" alt="Background Image" />
+
+    <div id="login-container">
+        <h1>To be used by Admin Only</h1>
+        <form id="login-form">
+            <input type="text" placeholder="Username" id="username">
+            <br>
+            <input type="password" placeholder="Password" id="password">
+            <br>
+            <button type="button" id="login-button" onclick="login()">Login</button>
+        </form>
+    </div>
+
+    <script>
+        function login() {
+            // Add your login logic here
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // For simplicity, let's just log the credentials for now
+            console.log("Username: " + username + ", Password: " + password);
+        }
+    </script>
+
+</body>
+</html>

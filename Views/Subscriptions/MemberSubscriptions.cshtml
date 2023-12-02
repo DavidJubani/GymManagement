@@ -1,0 +1,37 @@
+﻿@model IList<FinalProjectGym_management.Models.MemberSubscription>
+
+<h1>MemberSubscription List</h1>
+
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>MemberId</th>
+            <th>SubscriptionId</th>
+            <th>OriginalPrice</th>
+            <th>DiscountValue</th>
+            <th>PaidPrice</th>
+            <th>StartDate</th>
+            <th>EndDate</th>
+            <th>RemainingSessions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var member in Model)
+        {
+            @if (member.IsDeleted == false)
+            {
+                <tr>
+                    <td>@member.MemberId</td>
+                    <td>@member.SubscriptionId</td>
+                    <td>@member.OriginalPrice</td>
+                    <td>@member.DiscountValue</td>
+                    <td>@member.PaidPrice</td>
+                    <td>@member.StartDate</td>
+                    <td>@member.EndDate</td>
+                    <td>@member.RemainingSessions</td>
+                    
+                </tr>
+            }
+        }
+    </tbody>
+</table>

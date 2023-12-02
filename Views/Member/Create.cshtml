@@ -1,0 +1,91 @@
+﻿@model FinalProjectGym_management.Models.Members
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1 class="text-center">Create Member</h1>
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
+            <form asp-action="Create" method="post" class="needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!-- First Name -->
+                <div class="mb-3">
+                    <label asp-for="FirstName" class="form-label">First Name</label>
+                    <input asp-for="FirstName" class="form-control" required />
+                    <div class="invalid-feedback">
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </div>
+                </div>
+
+                <!-- Last Name -->
+                <div class="mb-3">
+                    <label asp-for="LastName" class="form-label">Last Name</label>
+                    <input asp-for="LastName" class="form-control" required />
+                    <div class="invalid-feedback">
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                </div>
+
+                <!-- Birthday -->
+                <div class="mb-3">
+                    <label asp-for="Birthday" class="form-label">Birthday</label>
+                    <input asp-for="Birthday" type="date" class="form-control" required />
+                    <div class="invalid-feedback">
+                        @Html.ValidationMessageFor(model => model.Birthday)
+                    </div>
+                </div>
+
+                <!-- ID Card Number -->
+                <div class="mb-3">
+                    <label asp-for="IdCardNumber" class="form-label">ID Card Number</label>
+                    <input asp-for="IdCardNumber" class="form-control" required />
+                    <div class="invalid-feedback">
+                        @Html.ValidationMessageFor(model => model.IdCardNumber)
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" type="email" class="form-control" required />
+                    <div class="invalid-feedback">
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+
+                <!-- Registration Date -->
+                <div class="mb-3">
+                    <label asp-for="Registration_Date" class="form-label">Registration Date</label>
+                    <input asp-for="Registration_Date" type="date" class="form-control" required />
+                    <div class="invalid-feedback">
+                        @Html.ValidationMessageFor(model => model.Registration_Date)
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <text>
+        <!-- Your existing scripts here -->
+        <script>
+            // Move the datepicker initialization to an external script if needed
+            $(document).ready(function () {
+                $('#registrationDatePicker').datepicker({
+                    format: 'yyyy/mm/dd',
+                    autoclose: true
+                });
+            });
+        </script>
+    </text>
+}

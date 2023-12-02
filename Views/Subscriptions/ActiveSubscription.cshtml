@@ -1,0 +1,65 @@
+﻿@model FinalProjectGym_management.Models.MemberSubscription
+
+@{
+    ViewData["Title"] = "Activate Subscriptions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label asp-for="MemberId">Member ID</label>
+        <input asp-for="MemberId" class="form-control" />
+        <span asp-validation-for="MemberId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SubscriptionId">Subscription ID</label>
+        <input asp-for="SubscriptionId" class="form-control" />
+        <span asp-validation-for="SubscriptionId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="OriginalPrice">Original Price</label>
+        <input asp-for="OriginalPrice" class="form-control" />
+        <span asp-validation-for="OriginalPrice" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DiscountValue">Discount Value</label>
+        <input asp-for="DiscountValue" class="form-control" />
+        <span asp-validation-for="DiscountValue" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PaidPrice">Paid Price</label>
+        <input asp-for="PaidPrice" class="form-control" />
+        <span asp-validation-for="PaidPrice" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StartDate">Start Date</label>
+        <input asp-for="StartDate" class="form-control" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EndDate">End Date</label>
+        <input asp-for="EndDate" class="form-control" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RemainingSessions">Remaining Sessions</label>
+        <input asp-for="RemainingSessions" class="form-control" />
+        <span asp-validation-for="RemainingSessions" class="text-danger"></span>
+    </div>
+
+    <!-- ... Other form fields ... -->
+
+    <button type="submit" class="btn btn-primary">Activate Subscriptions</button>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

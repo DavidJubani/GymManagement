@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+        </li>
+        <!-- Subscription tab -->
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Subscriptions" asp-controller="Subscriptions" asp-action="CreateSubscription">Create a new Subscription</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Subscriptions" asp-controller="Subscriptions" asp-action="ActiveSubscription">Active a new Subscription</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Subscriptions" asp-controller="Subscriptions" asp-action="GetAllSubscriptions">Get all Subscription</a>
+        </li>
+        <!-- Members tab-->
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Member" asp-controller="Member" asp-action="Create">Register a new Member</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Member" asp-controller="Member" asp-action="Get">Show all Active Members</a>
+        </li>
+        <!-- MembersSubscriptions-->
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Subscriptions" asp-controller="Subscriptions" asp-action="GetAllMembersWithSubscriptions">Show all Active Members with subscriptions</a>
+        </li>
+
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>
