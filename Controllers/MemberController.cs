@@ -12,12 +12,12 @@ namespace FinalProjectGym_management.Controllers
     {
 
         private readonly IMemberService memberService;
-        private readonly ApplicationDbContext context;
+       
 
-        public MemberController (IMemberService _memberService, ApplicationDbContext _context)
+        public MemberController (IMemberService _memberService)
         {
             memberService = _memberService;
-            context = _context;
+            
 
         }
         public IActionResult Index()

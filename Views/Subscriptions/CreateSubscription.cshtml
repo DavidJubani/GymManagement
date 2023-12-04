@@ -3,6 +3,32 @@
 @{
     ViewData["Title"] = "CreateSubscription";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    @section Styles {
+        <style>
+            body {
+                margin: 0; /* Remove default margin */
+                padding: 0; /* Remove default padding */
+                background-color: #f8f9fa; /* Set a background color as a fallback */
+            }
+
+            .background-image-container {
+                background-image: url('/images/slider-bg.jpg'); /* Update with the actual path to your image */
+                background-size: cover; /* Adjust as needed */
+                height: 100vh; /* Set the height to cover the entire viewport */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* Adjust container styles as needed for your layout */
+            .container {
+                background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+            }
+        </style>
+    }
 }<h1>Create Subscription</h1>
 @using (Html.BeginForm())
 {
@@ -35,12 +61,6 @@
     @Html.LabelFor(model => model.TotalPrice)
     @Html.EditorFor(model => model.TotalPrice, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Total Price" } })
     @Html.ValidationMessageFor(model => model.TotalPrice, "", new { @class = "text-danger" })
-</div>
-
-<div class="form-group">
-    @Html.LabelFor(model => model.IsDeleted)
-    @Html.CheckBoxFor(model => model.IsDeleted, new { @class = "form-check-input" })
-    @Html.ValidationMessageFor(model => model.IsDeleted, "", new { @class = "text-danger" })
 </div>
 
 <button type="submit" class="btn btn-primary">Save</button>

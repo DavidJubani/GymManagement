@@ -62,11 +62,11 @@ namespace FinalProjectGym_management.BussinesLayer.Services.Implementation
                 // Retrieve the existing member and subscription based on their Ids
                 var existingMember = _context.Members.Find(memberSubscription.MemberId);
                 var existingSubscription = _context.Subscriptions.Find(memberSubscription.SubscriptionId);
-
+                
                 if (existingMember != null && existingSubscription != null && !existingMember.IsDeleted && !existingSubscription.IsDeleted)
                 {
                     var HasActiveSubscription = _context.MembersSubscription.Any(s => s.MemberId == existingMember.Id && !s.Subscription.IsDeleted);
-
+                    var TotalPaidPrice = memberSubscription.OriginalPrice - memberSubscription.DiscountValue;
                     if (!HasActiveSubscription)
                     {
                         var newMemberSubscription = new MemberSubscription
@@ -75,7 +75,7 @@ namespace FinalProjectGym_management.BussinesLayer.Services.Implementation
                             SubscriptionId = existingSubscription.Id,
                             OriginalPrice = memberSubscription.OriginalPrice,
                             DiscountValue = memberSubscription.DiscountValue,
-                            PaidPrice = memberSubscription.PaidPrice,
+                            PaidPrice = TotalPaidPrice,
                             StartDate = memberSubscription.StartDate,
                             EndDate = memberSubscription.EndDate,
                             RemainingSessions = memberSubscription.RemainingSessions,

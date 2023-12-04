@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -65,17 +68,19 @@
 <body>
 
     <img src="images/slider-bg.jpg" alt="Background Image" />
-
-    <div id="login-container">
-        <h1>To be used by Admin Only</h1>
-        <form id="login-form">
-            <input type="text" placeholder="Username" id="username">
-            <br>
-            <input type="password" placeholder="Password" id="password">
-            <br>
-            <button type="button" id="login-button" onclick="login()">Login</button>
-        </form>
-    </div>
+@if (!SignInManager.IsSignedIn(User))
+    {
+        <div id="login-container">
+            <h1>To be used by Admin Only</h1>
+            <form id="login-form">
+                <input type="text" placeholder="Username" id="username">
+                <br>
+                <input type="password" placeholder="Password" id="password">
+                <br>
+                <button type="button" id="login-button" onclick="login()">Login</button>
+            </form>
+        </div>
+    }
 
     <script>
         function login() {
@@ -89,4 +94,6 @@
     </script>
 
 </body>
+
+
 </html>

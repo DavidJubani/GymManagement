@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FinalProjectGym_management.Models
+namespace FinalProjectGym_management.ViewModels
 {
-    public class Members
+    public class MembersVM
     {
-        [Required]
-        public int Id { get; set; } //check
         [Required]
         public string FirstName { get; set; }
         [Required]
@@ -16,9 +14,6 @@ namespace FinalProjectGym_management.Models
         public int IdCardNumber { get; set; }
         [Required]
         public string Email { get; set; }
-        [Required]
-        public DateTime Registration_Date { get; set; }
-        [Required]
-        public bool IsDeleted { get; set; }
+        
     }
 }

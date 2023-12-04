@@ -10,7 +10,7 @@ namespace FinalProjectGym_management.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly DbContext _dbcontext;
+        
 
         public HomeController(ILogger<HomeController> logger)
         {

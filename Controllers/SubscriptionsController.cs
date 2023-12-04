@@ -10,12 +10,12 @@ namespace FinalProjectGym_management.Controllers
     {
 
         private readonly ISubscriptionService subscriptionService;
-        private readonly ApplicationDbContext context;
+        
 
-        public SubscriptionsController(ISubscriptionService _subscriptionService, ApplicationDbContext _context)
+        public SubscriptionsController(ISubscriptionService _subscriptionService)
         {
             subscriptionService = _subscriptionService;
-            context = _context;
+            
 
         }
         public IActionResult Index()
