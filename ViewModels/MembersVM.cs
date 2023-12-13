@@ -11,8 +11,9 @@ namespace FinalProjectGym_management.ViewModels
         [Required]
         public DateTime Birthday { get; set; }
         [Required]
-        public int IdCardNumber { get; set; }
+        public string IdCardNumber { get; set; }
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
         
     }

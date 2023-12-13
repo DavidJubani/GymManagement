@@ -1,7 +1,6 @@
-﻿using FinalProjectGym_management.BussinesLayer.Services.Implementation;
-using FinalProjectGym_management.BussinesLayer.Services.Interface;
-using FinalProjectGym_management.Data;
-using FinalProjectGym_management.Models;
+﻿using Aplication.BussinesLayer.Services.Interface;
+using Domain.Models;
+using FinalProjectGym_management.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
@@ -28,7 +27,7 @@ namespace FinalProjectGym_management.Controllers
         public IActionResult Create()
         {
 
-            var model = new Members();
+            var model = new MembersVM();
 
             return View (model);
         }
@@ -41,11 +40,11 @@ namespace FinalProjectGym_management.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([Bind("FirstName,LastName,Birthday,IdCardNumber,Email,Registration_Date")] Members member)
+        public IActionResult Create([Bind("FirstName,LastName,Birthday,IdCardNumber,Email")] Members member)
         {
             if (ModelState.IsValid)
             {
-
+                
                 memberService.RegisterMember(member);
                 return RedirectToAction("Index", "Home");
             }

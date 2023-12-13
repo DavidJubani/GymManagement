@@ -1,4 +1,5 @@
-﻿@model FinalProjectGym_management.Models.Members
+﻿@model FinalProjectGym_management.ViewModels.MembersVM
+
 
 @{
     ViewData["Title"] = "Create";
@@ -75,9 +76,6 @@
                             @Html.ValidationMessageFor(model => model.Email)
                         </div>
                     </div>
-
-                    <!-- ... (repeat for other form elements) ... -->
-                    <!-- Submit Button -->
                     <div class="mb-4">
                         <button type="submit" class="btn btn-primary">Create</button>
                     </div>

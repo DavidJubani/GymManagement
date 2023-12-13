@@ -1,4 +1,4 @@
-﻿using FinalProjectGym_management.Models;
+﻿using Domain.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinalProjectGym_management.ViewModels

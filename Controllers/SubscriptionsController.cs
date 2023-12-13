@@ -1,7 +1,5 @@
-﻿using FinalProjectGym_management.BussinesLayer.Services.Implementation;
-using FinalProjectGym_management.BussinesLayer.Services.Interface;
-using FinalProjectGym_management.Data;
-using FinalProjectGym_management.Models;
+﻿using Aplication.BussinesLayer.Services.Interface;
+using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProjectGym_management.Controllers

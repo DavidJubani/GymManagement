@@ -1,6 +1,5 @@
-﻿using FinalProjectGym_management.Models;
+﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 
