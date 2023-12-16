@@ -13,9 +13,15 @@ namespace FinalProjectGym_management.Controllers
 
         private readonly ISubscriptionService subscriptionService;
         private readonly ApplicationDbContext dbContext;
+<<<<<<< HEAD
 
 
         public SubscriptionsController(ISubscriptionService _subscriptionService, ApplicationDbContext _dbContext)
+=======
+        
+
+        public SubscriptionsController(ISubscriptionService _subscriptionService , ApplicationDbContext _dbContext)
+>>>>>>> 8b247f5ce37239fa89dc949059dae416561936ba
         {
             subscriptionService = _subscriptionService;
             dbContext = _dbContext;
@@ -53,7 +59,11 @@ namespace FinalProjectGym_management.Controllers
         public JsonResult GetSubscriptionsIds()
         {
             var subscriptionID = dbContext.Subscriptions
+<<<<<<< HEAD
                 .Where(s => !s.IsDeleted)
+=======
+                .Where(s=> !s.IsDeleted)
+>>>>>>> 8b247f5ce37239fa89dc949059dae416561936ba
                 .Select(s => new { value = s.Id, text = s.Id.ToString() })
                 .ToList();
 
