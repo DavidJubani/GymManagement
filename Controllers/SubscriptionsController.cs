@@ -3,6 +3,7 @@ using FinalProjectGym_management.BussinesLayer.Services.Interface;
 using FinalProjectGym_management.Data;
 using FinalProjectGym_management.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProjectGym_management.Controllers
 {
@@ -10,12 +11,13 @@ namespace FinalProjectGym_management.Controllers
     {
 
         private readonly ISubscriptionService subscriptionService;
+        private readonly ApplicationDbContext dbContext;
         
 
-        public SubscriptionsController(ISubscriptionService _subscriptionService)
+        public SubscriptionsController(ISubscriptionService _subscriptionService , ApplicationDbContext _dbContext)
         {
             subscriptionService = _subscriptionService;
-            
+            dbContext = _dbContext;
 
         }
         public IActionResult Index()
@@ -38,7 +40,24 @@ namespace FinalProjectGym_management.Controllers
 
             return View(memberSubscription);
         }
+        public JsonResult GetMemberIds()
+        {
+            var memberIds = dbContext.Members
+                .Where(m => !m.IsDeleted)
+                .Select(m => new { value = m.Id, text = m.Id.ToString() })
+                .ToList();
 
+            return Json(memberIds);
+        }
+        public JsonResult GetSubscriptionsIds()
+        {
+            var subscriptionID = dbContext.Subscriptions
+                .Where(s=> !s.IsDeleted)
+                .Select(s => new { value = s.Id, text = s.Id.ToString() })
+                .ToList();
+
+            return Json(subscriptionID);
+        }
         [HttpPost]
         public IActionResult CreateSubscription([Bind("Code ,Description,NumberOfMonths,WeekFrequency,TotalNumberOfSessions,TotalPrice")] Subscriptions subscriptions)
         {

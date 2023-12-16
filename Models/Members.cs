@@ -15,7 +15,9 @@ namespace FinalProjectGym_management.Models
         [Required]
         public int IdCardNumber { get; set; }
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
+        [DataType(DataType.Date)]
         [Required]
         public DateTime Registration_Date { get; set; }
         [Required]
