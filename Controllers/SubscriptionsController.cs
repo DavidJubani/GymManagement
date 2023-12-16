@@ -2,7 +2,9 @@
 using FinalProjectGym_management.BussinesLayer.Services.Interface;
 using FinalProjectGym_management.Data;
 using FinalProjectGym_management.Models;
+using FinalProjectGym_management.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProjectGym_management.Controllers
 {
@@ -10,12 +12,13 @@ namespace FinalProjectGym_management.Controllers
     {
 
         private readonly ISubscriptionService subscriptionService;
-        
+        private readonly ApplicationDbContext dbContext;
 
-        public SubscriptionsController(ISubscriptionService _subscriptionService)
+
+        public SubscriptionsController(ISubscriptionService _subscriptionService, ApplicationDbContext _dbContext)
         {
             subscriptionService = _subscriptionService;
-            
+            dbContext = _dbContext;
 
         }
         public IActionResult Index()
@@ -26,7 +29,7 @@ namespace FinalProjectGym_management.Controllers
         public IActionResult CreateSubscription()
         {
 
-            var subscriptions = new Subscriptions();
+            var subscriptions = new SubscriptionsVM();
 
             return View(subscriptions);
         }
@@ -38,7 +41,24 @@ namespace FinalProjectGym_management.Controllers
 
             return View(memberSubscription);
         }
+        public JsonResult GetMemberIds()
+        {
+            var memberIds = dbContext.Members
+                .Where(m => !m.IsDeleted)
+                .Select(m => new { value = m.Id, text = m.Id.ToString() })
+                .ToList();
 
+            return Json(memberIds);
+        }
+        public JsonResult GetSubscriptionsIds()
+        {
+            var subscriptionID = dbContext.Subscriptions
+                .Where(s => !s.IsDeleted)
+                .Select(s => new { value = s.Id, text = s.Id.ToString() })
+                .ToList();
+
+            return Json(subscriptionID);
+        }
         [HttpPost]
         public IActionResult CreateSubscription([Bind("Code ,Description,NumberOfMonths,WeekFrequency,TotalNumberOfSessions,TotalPrice")] Subscriptions subscriptions)
         {
@@ -56,7 +76,7 @@ namespace FinalProjectGym_management.Controllers
         {
             try
             {
-                if(!ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     var errors = ModelState.Values.SelectMany(v => v.Errors);
                     foreach (var error in errors)
@@ -79,12 +99,12 @@ namespace FinalProjectGym_management.Controllers
                 ModelState.AddModelError(string.Empty, "An error occurred while creating the active subscription.");
             }
             return RedirectToAction("Error");
-            }
+        }
 
         [HttpPost]
         public IActionResult DeleteSubscription(int id)
         {
-                     
+
             subscriptionService.DeleteSubscription(id);
 
             var subscription = subscriptionService.GetAllSubscriptions();
@@ -97,10 +117,10 @@ namespace FinalProjectGym_management.Controllers
         public IActionResult GetAllSubscriptions()
         {
             var subscriptions = subscriptionService.GetAllSubscriptions();
-            return View("SubscriptionsList" ,subscriptions);
+            return View("SubscriptionsList", subscriptions);
         }
 
-        [HttpGet] 
+        [HttpGet]
         public IActionResult Search(Subscriptions subscriptions)
         {
             var searchSubscription = subscriptionService.Search(subscriptions);
@@ -121,5 +141,3 @@ namespace FinalProjectGym_management.Controllers
     }
 
 }
-
-

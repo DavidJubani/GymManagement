@@ -54,160 +54,7 @@ namespace FinalProjectGym_management.BussinesLayer.Services.Implementation
             }
         }
 
-       /* public Members GetMemberByIdCardNumber(int IdCardNumber)
-        {
-            try
-            {
-                var member = _dbcontext.Members.Where(p => p.IdCardNumber == IdCardNumber).FirstOrDefault();
 
-                if (member == null)
-                {
-                    return null;
-                }
-
-                var Member = new Members()
-                {
-                    FirstName = member.FirstName,
-                    LastName = member.LastName,
-                    Birthday = member.Birthday,
-                    IdCardNumber = member.IdCardNumber,
-                    Email = member.Email,
-                    Registration_Date = member.Registration_Date,
-                    IsDeleted = member.IsDeleted,
-
-                };
-
-                 return Member;
-
-            }
-
-            catch (Exception ex)
-            {
-                throw new Exception("Member Not found", ex);
-            }
-
-
-        } */
-
-       /* public async Task<List<Members>> GetMemberByFirstName(string firstname)
-        {
-            try
-            {
-
-                var member = _dbcontext.Members.Where(p => p.FirstName.Contains(firstname)).ToList();
-
-                if (member == null)
-                {
-                    throw new Exception("Member not found");
-                }
-
-                var members = new List<Members>();
-                foreach (var m in members)
-                {
-                    members.Add(new Members()
-                    {
-
-                        FirstName = m.FirstName,
-                        LastName = m.LastName,
-                        Birthday = m.Birthday,
-                        IdCardNumber = m.IdCardNumber,
-                        Email = m.Email,
-                        Registration_Date = m.Registration_Date,
-                        IsDeleted = m.IsDeleted,
-
-                    });
-
-                }
-
-                return members;
-            }
-
-            catch (Exception ex)
-            {
-
-                throw new Exception("Error in finding member", ex);
-            }
-        } */
-
-      /*  public async Task<List<Members>> GetMemberByLastName(string lastname)
-        {
-            try
-            {
-
-                var member = _dbcontext.Members.Where(p => p.LastName.Contains(lastname)).ToList();
-
-                if (member == null)
-                {
-                    throw new Exception("Member not found");
-                }
-
-                var Member = new List<Members>();
-                foreach (var m in member)
-                {
-                    Member.Add(new Members()
-                    {
-
-                        FirstName = m.FirstName,
-                        LastName = m.LastName,
-                        Birthday = m.Birthday,
-                        IdCardNumber = m.IdCardNumber,
-                        Email = m.Email,
-                        Registration_Date = m.Registration_Date,
-                        IsDeleted = m.IsDeleted,
-
-                    });
-
-                }
-
-                return Member;
-            }
-
-            catch (Exception ex)
-            {
-
-                throw new Exception("Error in finding member" , ex);
-            }
-        } */
-
-      /*  public async Task<List<Members>> GetMemberByEmail(string email)
-        {
-            try
-            {
-
-                var member = _dbcontext.Members.Where(p => p.Email.Contains(email)).ToList();
-
-                if (member == null)
-                {
-                    throw new Exception("Member not found");
-                }
-
-                var Member = new List<Members>();
-                foreach (var m in member)
-                {
-                     Member.Add(new Members()
-                    {
-
-                        FirstName = m.FirstName,
-                        LastName = m.LastName,
-                        Birthday = m.Birthday,
-                        IdCardNumber = m.IdCardNumber,
-                        Email = m.Email,
-                        Registration_Date = m.Registration_Date,
-                        IsDeleted = m.IsDeleted,
-
-                    });
-
-                }
-
-                 return Member;
-            }
-
-            catch (Exception ex)
-            {
-
-                throw new Exception("Error in finding member", ex);
-            }
-        } */
 
         public void DeleteMember(int id)
         {
@@ -215,13 +62,20 @@ namespace FinalProjectGym_management.BussinesLayer.Services.Implementation
             try
             {
                 var member = _dbcontext.Members.FirstOrDefault(p => p.Id == id);
+                
 
                 if (member == null)
                 {
                     throw new Exception("Member not found");
+                } 
+                member.IsDeleted = true ;
+
+                var membersub = _dbcontext.MembersSubscription.FirstOrDefault(p => p.MemberId == id);
+                if (membersub != null)
+                {
+                    membersub.IsDeleted = true;
                 }
-                
-                     member.IsDeleted = true ;
+
 
                 _dbcontext.SaveChanges();
 

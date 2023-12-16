@@ -4,14 +4,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image with Cover</title>
+    <title>Gym Management Admin Login</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             overflow: hidden; /* Prevent default body margin/padding */
         }
 
@@ -34,10 +36,12 @@
             background: rgba(0, 0, 0, 0.7); /* Add a semi-transparent black background */
             padding: 20px; /* Add padding for better visibility */
             border-radius: 10px; /* Add border-radius for a rounded appearance */
+            color: #fff; /* Text color */
         }
 
         h1 {
             font-size: 36px;
+            margin-bottom: 20px;
         }
 
         #login-form {
@@ -58,6 +62,7 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            border-radius: 5px;
         }
 
             #login-button:hover {
@@ -66,34 +71,22 @@
     </style>
 </head>
 <body>
-
-    <img src="images/slider-bg.jpg" alt="Background Image" />
-@if (!SignInManager.IsSignedIn(User))
+    @if (TempData["ErrorMessage"] != null)
     {
-        <div id="login-container">
-            <h1>To be used by Admin Only</h1>
-            <form id="login-form">
-                <input type="text" placeholder="Username" id="username">
-                <br>
-                <input type="password" placeholder="Password" id="password">
-                <br>
-                <button type="button" id="login-button" onclick="login()">Login</button>
-            </form>
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
         </div>
     }
 
-    <script>
-        function login() {
-            // Add your login logic here
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
 
-            // For simplicity, let's just log the credentials for now
-            console.log("Username: " + username + ", Password: " + password);
-        }
-    </script>
+    <img src="images/slider-bg.jpg" alt="Background Image" />
+    @if (!SignInManager.IsSignedIn(User))
+    {
+        <div id="login-container">
+            <h1>Gym Management Admin Login</h1>
+            <!-- Your login form goes here -->
+        </div>
+    }
 
 </body>
-
-
 </html>

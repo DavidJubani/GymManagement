@@ -12,15 +12,19 @@
     @Html.AntiForgeryToken()
 
     <div class="form-group">
-        <label asp-for="MemberId">Member ID</label>
-        <input asp-for="MemberId" class="form-control" />
-        <span asp-validation-for="MemberId" class="text-danger"></span>
+        <label asp-for="MemberId" class="form-label">Member ID</label>
+        <select id="memberIdDropdown" name="MemberId" class="form-control"></select>
+        <div class="invalid-feedback">
+            @Html.ValidationMessageFor(model => model.MemberId)
+        </div>
     </div>
 
     <div class="form-group">
         <label asp-for="SubscriptionId">Subscription ID</label>
-        <input asp-for="SubscriptionId" class="form-control" />
-        <span asp-validation-for="SubscriptionId" class="text-danger"></span>
+        <select id="subscriptionsIdDropdown" name="SubscriptionId" class="form-control"></select>
+        <div class="invalid-feedback">
+            @Html.ValidationMessageFor(model => model.SubscriptionId)
+        </div>
     </div>
     <div class="form-group">
         <label asp-for="OriginalPrice">Original Price</label>
@@ -48,7 +52,7 @@
         <span asp-validation-for="RemainingSessions" class="text-danger"></span>
     </div>
 
-    <!-- ... Other form fields ... -->
+
 
     <button type="submit" class="btn btn-primary">Activate Subscriptions</button>
 }
@@ -57,4 +61,57 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Load member IDs on page load
+            loadMemberIds();
+            loadSubscriptionsIds();
+
+            // Handle form submission
+            $("#activateSubscriptionsForm").submit(function (event) {
+                event.preventDefault(); // Prevent the default form submission
+                submitForm();
+            });
+        });
+
+        function loadMemberIds() {
+            $.ajax({
+                url: "/Subscriptions/GetMemberIds",
+                type: "GET",
+                success: function (data) {
+                    var dropdown = $("#memberIdDropdown");
+                    dropdown.empty();
+                    $.each(data, function (index, item) {
+                        dropdown.append($('<option></option>').attr('value', item.value).text(item.text));
+                    });
+                },
+                error: function () {
+                    console.error("Error loading member IDs.");
+                }
+            });
+        }
+
+        function loadSubscriptionsIds() {
+            $.ajax({
+                url: "/Subscriptions/GetSubscriptionsIds",
+                type: "GET",
+                success: function (data) {
+                    var dropdown = $("#subscriptionsIdDropdown");
+                    dropdown.empty();
+                    $.each(data, function (index, item) {
+                        dropdown.append($('<option></option>').attr('value', item.value).text(item.text));
+                    });
+                },
+                error: function () {
+                    console.error("Error loading subscription IDs.");
+                }
+            });
+        }
+
+        function submitForm() {
+            // Your form submission logic here
+            console.log("Form submitted");
+        }
+    </script>
 }

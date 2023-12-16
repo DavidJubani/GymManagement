@@ -4,6 +4,7 @@ using FinalProjectGym_management.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace FinalProjectGym_management
 {
     public class Program

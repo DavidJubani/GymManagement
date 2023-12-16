@@ -1,4 +1,4 @@
-﻿@model FinalProjectGym_management.Models.Members
+﻿@model FinalProjectGym_management.ViewModels.MembersVM
 
 @{
     ViewData["Title"] = "Create";
@@ -8,82 +8,74 @@
 @section Styles {
     <style>
         body {
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
-            background-color: #f8f9fa; /* Set a background color as a fallback */
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
         }
 
-        .background-image-container {
-            background-image: url('/images/slider-bg.jpg'); /* Update with the actual path to your image */
-            background-size: cover; /* Adjust as needed */
-            height: 100vh; /* Set the height to cover the entire viewport */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Adjust container styles as needed for your layout */
         .container {
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 }
 
-<div class="background-image-container">
-    <div class="container">
-        <h1 class="text-center">Create Member</h1>
-        <div class="row justify-content-md-center">
-            <div class="col-md-8">
-                <form asp-action="Create" method="post" class="needs-validation" novalidate>
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <!-- First Name -->
-                    <div class="mb-3">
-                        <label asp-for="FirstName" class="form-label">First Name</label>
-                        <input asp-for="FirstName" class="form-control" required />
-                        <div class="invalid-feedback">
-                            @Html.ValidationMessageFor(model => model.FirstName)
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="LastName" class="form-label">Last Name</label>
-                        <input asp-for="LastName" class="form-control" required />
-                        <div class="invalid-feedback">
-                            @Html.ValidationMessageFor(model => model.LastName)
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="Birthday" class="form-label"> Birthday</label>
-                        <input asp-for="Birthday" class="form-control" required />
-                        <div class="invalid-feedback">
-                            @Html.ValidationMessageFor(model => model.Birthday)
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="IdCardNumber" class="form-label"> Id Card Number</label>
-                        <input asp-for="IdCardNumber" class="form-control" required />
-                        <div class="invalid-feedback">
-                            @Html.ValidationMessageFor(model => model.IdCardNumber)
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="Email" class="form-label"> E mail</label>
-                        <input asp-for="Email" class="form-control" required />
-                        <div class="invalid-feedback">
-                            @Html.ValidationMessageFor(model => model.Email)
-                        </div>
-                    </div>
 
-                    <!-- ... (repeat for other form elements) ... -->
-                    <!-- Submit Button -->
-                    <div class="mb-4">
-                        <button type="submit" class="btn btn-primary">Create</button>
+<div class="container">
+    <h1 class="text-center">Create Member</h1>
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
+            @using (Html.BeginForm())
+            {
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="FirstName" class="form-label">First Name</label>
+                    <input asp-for="FirstName" class="form-control" required />
+                    <div class="invalid-feedback">
+                        @Html.ValidationMessageFor(model => model.FirstName)
                     </div>
-                </form>
-            </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LastName" class="form-label">Last Name</label>
+                    <input asp-for="LastName" class="form-control" required />
+                    <div class="invalid-feedback">
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Birthday" class="form-label"> Birthday</label>
+                    <input asp-for="Birthday" class="form-control" required />
+                    <div class="invalid-feedback">
+                        @Html.ValidationMessageFor(model => model.Birthday)
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="IdCardNumber" class="form-label"> Id Card Number</label>
+                    <input asp-for="IdCardNumber" class="form-control" required />
+                    <div class="invalid-feedback">
+                        @Html.ValidationMessageFor(model => model.IdCardNumber)
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label"> E mail</label>
+                    <input asp-for="Email" class="form-control" required />
+                    <div class="invalid-feedback">
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </div>
+
+ 
+                <div class="mb-4">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            }
         </div>
     </div>
 </div>
-

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinalProjectGym_management.Models
 {
@@ -15,15 +16,15 @@ namespace FinalProjectGym_management.Models
         public Subscriptions? Subscription { get; set; }
         
         public int SubscriptionId { get; set; }
-
+        [DataType(DataType.Currency)]
         public decimal OriginalPrice { get; set; }
-
+        [DataType(DataType.Currency)]
         public decimal DiscountValue { get; set; }
-
+        [DataType(DataType.Currency)]
         public decimal PaidPrice { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
-
+        [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
 
         public  int  RemainingSessions { get; set; }

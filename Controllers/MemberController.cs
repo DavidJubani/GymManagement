@@ -2,6 +2,7 @@
 using FinalProjectGym_management.BussinesLayer.Services.Interface;
 using FinalProjectGym_management.Data;
 using FinalProjectGym_management.Models;
+using FinalProjectGym_management.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
@@ -28,10 +29,12 @@ namespace FinalProjectGym_management.Controllers
         public IActionResult Create()
         {
 
-            var model = new Members();
+            var model = new MembersVM();
 
             return View (model);
         }
+
+
 
         public IActionResult Search()
         {
@@ -41,7 +44,7 @@ namespace FinalProjectGym_management.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([Bind("FirstName,LastName,Birthday,IdCardNumber,Email,Registration_Date")] Members member)
+        public IActionResult Create([Bind("FirstName,LastName,Birthday,IdCardNumber,Email")] Members member)
         {
             if (ModelState.IsValid)
             {
@@ -49,7 +52,8 @@ namespace FinalProjectGym_management.Controllers
                 memberService.RegisterMember(member);
                 return RedirectToAction("Index", "Home");
             }
-            return View(member);
+            TempData["ErrorMessage"] = "There was an error. Please check your input.";
+            return RedirectToAction("Index", "Home");
         }
         [HttpGet]
         public async Task <IActionResult> Get()
