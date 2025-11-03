@@ -5,7 +5,7 @@ namespace FinalProjectGym_management.Models
     public class Members
     {
         [Required]
-        public int Id { get; set; } //check
+        public int Id { get; set; } 
         [Required]
         public string FirstName { get; set; }
         [Required]
